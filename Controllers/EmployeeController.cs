@@ -58,11 +58,33 @@ namespace EmployeeHours.Controllers
             //Sortiranje 
             aggregatedData.Sort((a, b) => b.TotalHours.CompareTo(a.TotalHours));
 
-            
+            //procenat za svakog zaposlenog
+            var totalHoursSum = aggregatedData.Sum(e => e.TotalHours);
+            foreach (var employee in aggregatedData)
+            {
+                employee.Percentage = Math.Round((employee.TotalHours / totalHoursSum) * 100, 2);
+            }
 
-            
+            //priprema podataka za grafik
+            var employeeNamesPercentages = aggregatedData.Select(e => $"{e.EmployeeName} ({e.Percentage}%)").ToArray();
+            var percentagesChart = new Chart(width: 600, height: 400)
+                .AddTitle("Percentage of total hours worked by employee")
+                .AddSeries(
+                    chartType: "Pie",
+                    xValue: employeeNamesPercentages,
+                    yValues: aggregatedData.Select(e => e.TotalHours).ToArray()
+                );
 
-            
+
+            //kreiranje png slike
+            var chartPng = percentagesChart.GetBytes("png");
+
+            var filePath = Server.MapPath("~/Images/pie-chart.png");
+            System.IO.File.WriteAllBytes(filePath, chartPng);
+
+
+
+
             return View(aggregatedData);
 
         }
