@@ -1,0 +1,34 @@
+﻿@model List<EmployeeHours.Models.Employee>
+@{
+    ViewBag.Title = "Employee hours";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Employee Data</h2>
+<link rel="stylesheet" href="~/Content/styles.css">
+@{
+   
+    <table>
+        <thead>
+
+            <tr>
+                <th>Name</th>
+                <th>TotalHours</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var employee in Model)
+            {
+                <tr style="@(employee.TotalHours < 100 ? "background-color: pink;" : "")">
+
+                    <td>@employee.EmployeeName</td>
+                    <td>@employee.TotalHours</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    
+}
+

@@ -1,0 +1,25 @@
+﻿table, th, td {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 10px;
+    text-align: left;
+    border: 1px solid lightgrey;
+}
+
+table {
+    border-collapse: collapse;
+    width: 50%;
+    margin-left: 25%;
+}
+
+th {
+    background-color: lightgray;
+    font-weight: bold;
+}
+
+tr {
+    font-weight: 500;
+}
+h2{
+
+    text-align:center;
+}
